@@ -1,0 +1,8 @@
+.user-form {
+    display: flex;
+    gap: 1rem;
+}
+.user-field {
+    display: flex;
+    gap: 1rem;
+}
