@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CreateUser.css';
-import jwt from './jwt';
+import jwt from '../jwt';
 
-function CreateUser() {
-    const [userName, setUserName] = useState('');
-    const [displayName, setDisplayName] = useState('');
-    const [userId, setUserId] = useState('');
+function CreateUser({ userName, setUserName, displayName, setDisplayName, userId, setUserId }) {
 
     const createUser = async (event) => {
         event.preventDefault();
@@ -22,9 +19,8 @@ function CreateUser() {
                         'Authorization': 'Bearer ' + jwt
                     }
                 });
-
-            if(res && res?.id) {
-                setUserId(res.id);
+            if(res && res?.data?.id) {
+                setUserId(res.data.id);
             }
             //TODO: show success to user 
             
@@ -37,7 +33,7 @@ function CreateUser() {
 
     return(
         <form onSubmit={createUser} className='user-form'>
-            <label for="username" className='user-field'>
+            <label htmlFor="username" className='user-field'>
                 Username 
                 <input type="text" 
                     name="username" 
@@ -47,7 +43,7 @@ function CreateUser() {
                     value={userName} 
                     onChange={e => setUserName(e.target.value)} />
             </label>
-            <label for="displayName" className='user-field'>
+            <label htmlFor="displayName" className='user-field'>
                 Display Name 
                 <input type="text" 
                     name="displayName" 

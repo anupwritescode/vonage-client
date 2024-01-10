@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import jwt from './jwt';
+import jwt from '../jwt';
 
-function CreateConv() {
-    const [convName, setConvName] = useState('');
-    const [convDisplayName, setConvDisplayName] = useState('');
-    const [convId, setConvId] = useState('');
+function CreateConv({convName, setConvName, convDisplayName, setConvDisplayName, convId, setConvId}) {
 
     const createConv= async (event) => {
         event.preventDefault();
@@ -22,8 +19,8 @@ function CreateConv() {
                     }
                 });
 
-            if(res && res?.id) {
-                setConvId(res.id);
+            if(res && res?.data?.id) {
+                setConvId(res?.data?.id);
             }
             //TODO: show success to user 
             
@@ -36,7 +33,7 @@ function CreateConv() {
 
     return(
         <form onSubmit={createConv} className='user-form'>
-            <label for="convname" className='user-field'>
+            <label htmlFor="convname" className='user-field'>
                 Conversation Name
                 <input type="text" 
                     name="convname" 
@@ -46,7 +43,7 @@ function CreateConv() {
                     value={convName} 
                     onChange={e => setConvName(e.target.value)} />
             </label>
-            <label for="convDisplayName" className='user-field'>
+            <label htmlFor="convDisplayName" className='user-field'>
                 Conversation Display Name 
                 <input type="text" 
                     name="convDisplayName" 
